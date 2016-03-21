@@ -3,10 +3,9 @@ import time
 import SocketServer
 from ddbpy.client import Send
 
-#DFE = ('127.0.0.1', 5555)
-DFE = ('192.168.99.100', 5555)
+DFE = ('127.0.0.1', 5555)
 
-BUCKET = 'graphite'
+BUCKET = 'metrics'
 DEBUG = True
 
 
