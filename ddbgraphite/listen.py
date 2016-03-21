@@ -3,22 +3,28 @@ import time
 import SocketServer
 from ddbpy.client import Send
 
-DFE = ('127.0.0.1', 5555)
+#DFE = ('127.0.0.1', 5555)
+DFE = ('192.168.99.100', 5555)
+
 BUCKET = 'graphite'
-DEBUG = False
+DEBUG = True
 
 
 class TCPHandler(SocketServer.BaseRequestHandler):
     def handle(self):
-        data = self.request.recv(1024).strip()
-        if DEBUG:
-            print data.split()[0], data.split()[1]
-        with Send(DFE) as send:
-            send.switch_streaming(BUCKET)
-            ts = int(time.time())
-            metric = data.split()[0]
-            value = data.split()[1]
-            send.send_payload(metric, ts, value)
+        try:
+            data = self.request.recv(1024).strip()
+            if data:
+                if DEBUG:
+                    print data.split()[0], data.split()[1]
+                with Send(DFE) as send:
+                    send.switch_streaming(BUCKET)
+                    ts = int(time.time())
+                    metric = data.split()[0]
+                    value = data.split()[1]
+                    send.send_payload(metric, ts, value)
+        except Exception, e:
+            print e
 
 
 def main():
