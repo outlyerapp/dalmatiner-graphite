@@ -7,6 +7,7 @@ DFE = ('127.0.0.1', 5555)
 BUCKET = 'graphite'
 DEBUG = False
 
+
 class UDPHandler(SocketServer.BaseRequestHandler):
     def handle(self):
         data = self.request[0].strip()
@@ -21,7 +22,8 @@ class UDPHandler(SocketServer.BaseRequestHandler):
             value = data.split()[1]
             send.send_payload(metric, ts, value)
 
-if __name__ == "__main__":
+
+def main():
     HOST, PORT = "localhost", 2003
     server = SocketServer.UDPServer((HOST, PORT), UDPHandler)
     server.serve_forever()

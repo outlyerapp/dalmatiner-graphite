@@ -24,9 +24,9 @@ def get_version():
     return VERSION
 
 
-dependencies = ['nose']
+dependencies = ['nose', 'ddbpy']
 
-setup(name='ddbpy',
+setup(name='ddbgraphite',
       version=get_version(),
       url='https://github.com/dataloop/dalmatiner-graphite',
       download_url=
@@ -43,7 +43,11 @@ setup(name='ddbpy',
       zip_safe=False,
       platforms='any',
       install_requires=dependencies,
-      entry_points={},
+      entry_points={
+          'console_scripts': [
+              'ddbgraphite = ddbgraphite.listen:main',
+              ],
+          },
       classifiers=[
           "Intended Audience :: Developers",
           "Intended Audience :: System Administrators",
