@@ -24,6 +24,6 @@ class UDPHandler(SocketServer.BaseRequestHandler):
 
 
 def main():
-    HOST, PORT = "localhost", 2003
+    HOST, PORT = "0.0.0.0", 2003
     server = SocketServer.UDPServer((HOST, PORT), UDPHandler)
     server.serve_forever()
