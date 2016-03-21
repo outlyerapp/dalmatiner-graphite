@@ -10,11 +10,9 @@ DEBUG = False
 
 class TCPHandler(SocketServer.BaseRequestHandler):
     def handle(self):
-        data = self.request[0].strip()
+        data = self.request.recv(1024).strip()
         if DEBUG:
-            socket = self.request[1]
             print data.split()[0], data.split()[1]
-            socket.sendto(data.upper(), self.client_address)
         with Send(DFE) as send:
             send.switch_streaming(BUCKET)
             ts = int(time.time())
