@@ -8,7 +8,7 @@ BUCKET = 'graphite'
 DEBUG = False
 
 
-class UDPHandler(SocketServer.BaseRequestHandler):
+class TCPHandler(SocketServer.BaseRequestHandler):
     def handle(self):
         data = self.request[0].strip()
         if DEBUG:
@@ -25,5 +25,5 @@ class UDPHandler(SocketServer.BaseRequestHandler):
 
 def main():
     HOST, PORT = "0.0.0.0", 2003
-    server = SocketServer.UDPServer((HOST, PORT), UDPHandler)
+    server = SocketServer.TCPServer((HOST, PORT), TCPHandler)
     server.serve_forever()
